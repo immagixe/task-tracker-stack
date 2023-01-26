@@ -28,5 +28,3 @@ jobs:
           cd ..${{ secrets.REMOTE_TARGET }}
           docker-compose -f docker-compose-deploy.yml pull
           docker-compose -f docker-compose-deploy.yml up -d
-          mkdir mydir
-          echo $RSYNC_STDOUT
