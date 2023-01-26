@@ -26,5 +26,6 @@ jobs:
           ls -al
         SCRIPT_AFTER: |
           cd ..${{ secrets.REMOTE_TARGET }}
+          docker-compose -f docker-compose-deploy.yml up
           mkdir mydir
           echo $RSYNC_STDOUT
