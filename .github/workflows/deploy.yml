@@ -20,14 +20,16 @@ jobs:
         ARGS: "-rlgoDzvc -i"
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        TARGET: ${{ secrets.REMOTE_TARGET }}
         SCRIPT_BEFORE: |
           whoami
           ls -al
         SCRIPT_AFTER: |
           whoami
           ls -al
-          docker-compose pull
-          docker-compose up
+          cd ${{ secrets.REMOTE_TARGET }}
+          docker-compose -f docker-compose-deploy.yml pull
+          docker-compose -f docker-compose-deploy.yml up
           echo $RSYNC_STDOUT
 
 
