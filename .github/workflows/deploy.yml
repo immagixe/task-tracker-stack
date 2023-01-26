@@ -26,6 +26,8 @@ jobs:
         SCRIPT_AFTER: |
           whoami
           ls -al
+          docker-compose pull
+          docker-compose up
           echo $RSYNC_STDOUT
 
 
