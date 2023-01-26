@@ -13,15 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: alex-ac/github-action-ssh-docker-compose@master
-      name: Docker-Compose Remote Deployment
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.7
       with:
-        ssh_host: ${{ secrets.REMOTE_HOST }}
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh_user: ${{ secrets.REMOTE_USER }}
-    - 
-      name: Test
-      run: docker-compose pull && docker-compose -f docker-compose-deploy.yml up
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}  
+        script: whoami
 
 
       
