@@ -27,7 +27,7 @@ jobs:
         SCRIPT_AFTER: |
           whoami
           ls -al
-          cd ${{ secrets.REMOTE_TARGET }}
+          cd ..${{ secrets.REMOTE_TARGET }}
           docker-compose -f docker-compose-deploy.yml pull
           docker-compose -f docker-compose-deploy.yml up
           echo $RSYNC_STDOUT
