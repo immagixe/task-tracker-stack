@@ -19,4 +19,14 @@ jobs:
         ssh_host: ${{ secrets.REMOTE_HOST }}
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         ssh_user: ${{ secrets.REMOTE_USER }}
-        docker_compose_filename: docker-compose-deploy.yml
+    - 
+      name: Test
+      run: docker-compose pull && docker-compose -f docker-compose-deploy.yml up
+
+
+      
+
+
+   
+        
+        
