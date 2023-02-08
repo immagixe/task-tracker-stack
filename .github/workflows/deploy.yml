@@ -1,0 +1,31 @@
+name: cd
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Deploy to Staging server
+      uses: easingthemes/ssh-deploy@main
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        ARGS: "-rlgoDzvc -i"
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        TARGET: ${{ secrets.REMOTE_TARGET }}
+        SCRIPT_BEFORE: |
+          whoami
+          ls -al
+        SCRIPT_AFTER: |
+          cd ..${{ secrets.REMOTE_TARGET }}
+          echo "${{ secrets.ENV_FILE }}" > .env
+          docker-compose -f docker-compose-deploy.yml pull
+          docker-compose -f docker-compose-deploy.yml up -d
