@@ -26,6 +26,6 @@ jobs:
           ls -al
         SCRIPT_AFTER: |
           cd ..${{ secrets.REMOTE_TARGET }}
-          echo "${{ secrets.ENV_FILE }}" > .env_deploy
+          echo "${{ secrets.ENV_FILE }}" > .env
           docker-compose -f docker-compose-deploy.yml pull
           docker-compose -f docker-compose-deploy.yml up -d
