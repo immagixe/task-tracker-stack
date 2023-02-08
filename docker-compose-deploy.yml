@@ -22,7 +22,7 @@ services:
     image: 'immagixe/task-tracker-email-sender:1.0'
     restart: on-failure
     container_name: app-email-sender
-    env_file: ./.env
+    env_file: ./.env_deploy
     depends_on:
       - db
       - redis
